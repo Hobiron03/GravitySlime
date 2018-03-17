@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour {
     Vector3 gravityPosY = new Vector3(0, -9.7f, 0);
     Vector3 gravityNegY = new Vector3(0, 9.7f, 0);
 
-    float power = 30.0f;
-    float maxSpeed = 30.0f;
+    float power = 15.0f;
+    float maxSpeed = 7.0f;
     Rigidbody2D rgbody;
 	// Use this for initialization
 	void Start () 
@@ -21,8 +21,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        
-		
+
 	}
 
     void FixedUpdate()
@@ -42,6 +41,11 @@ public class PlayerController : MonoBehaviour {
 
         Debug.Log(Physics.gravity);
 
-        rgbody.AddForce(acc_vec*power, ForceMode2D.Force);
+        float speedX = Mathf.Abs(rgbody.velocity.x);
+
+        if (speedX < maxSpeed)
+        {
+            rgbody.AddForce(acc_vec * power, ForceMode2D.Force);
+        }
     }
 }
