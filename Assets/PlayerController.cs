@@ -5,17 +5,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     Vector2 acc_vec;
-    Vector3 gravityPosY = new Vector3(0, -9.7f, 0);
-    Vector3 gravityNegY = new Vector3(0, 9.7f, 0);
+    Vector3 gravUpY = new Vector3(0, -9.7f, 0);
+    Vector3 gravDownY = new Vector3(0, 9.7f, 0);
 
     float power = 15.0f;
     float maxSpeed = 7.0f;
+
     Rigidbody2D rgbody;
+    AudioSource audio;
+    public AudioClip audioClip;
 	// Use this for initialization
 	void Start () 
     {
         rgbody = this.GetComponent<Rigidbody2D>();
-
+        audio = GetComponent<AudioSource>();
+        audio.clip = audioClip;
 	}
 	
 	// Update is called once per frame
@@ -32,20 +36,28 @@ public class PlayerController : MonoBehaviour {
 
         if(acc_vec.y < 0f)
         {
-            Physics.gravity = gravityPosY;
+            Physics.gravity = gravUpY;
         }
         else
         {
-            Physics.gravity = gravityNegY; 
+            Physics.gravity = gravDownY; 
         }
-
-        Debug.Log(Physics.gravity);
 
         float speedX = Mathf.Abs(rgbody.velocity.x);
 
         if (speedX < maxSpeed)
         {
             rgbody.AddForce(acc_vec * power, ForceMode2D.Force);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("ぶつかったよ");
+        if (collision.gameObject.tag == "Ground")
+        {
+            Debug.Log("ground");
+            audio.Play();
         }
     }
 }
