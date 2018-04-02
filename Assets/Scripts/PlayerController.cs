@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour {
             Physics.gravity = gravUpY;
             //Debug.Log(Physics.gravity);
         }
-        else if(-0.7f < acc_vec.x && acc_vec.x < -1.2f)
+        /*else if(-0.7f < acc_vec.x && acc_vec.x < -1.2f)
         {
             Physics.gravity = gravDownX;
         }
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
         {
             Physics.gravity = gravUpX;
             //Debug.Log(Physics.gravity);
-        }
+        }*/
 
         float speedX = Mathf.Abs(rgbody.velocity.x);
 
