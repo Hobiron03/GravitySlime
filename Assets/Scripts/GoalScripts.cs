@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GoalScripts : MonoBehaviour {
 
+    public GameManager gameManager;
+    public TreasureController treasureController;
+
+    public Sprite goalImage2;
 	// Use this for initialization
 	void Start () {
 		
@@ -18,7 +22,10 @@ public class GoalScripts : MonoBehaviour {
     {
         if(collision.gameObject.tag == "Player")
         {
-            Debug.Log("Goal!!");
+            
+            GetComponent<SpriteRenderer>().sprite = goalImage2;
+            treasureController.GetTreasure();
+            gameManager.GetComponent<GameManager>().GameClear();
         }
     }
 }
